@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: code-judge-db
+    environment:
+      POSTGRES_DB: codejudge
+      POSTGRES_USER: codejudge
+      POSTGRES_PASSWORD: local_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
