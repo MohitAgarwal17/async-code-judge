@@ -12,7 +12,8 @@ public class Submission {
 
     private String language;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private SubmissionStatus status;
 
     public Submission() {
     }
@@ -29,11 +30,11 @@ public class Submission {
         this.language = language;
     }
 
-    public String getStatus() {
+    public SubmissionStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(SubmissionStatus status) {
         this.status = status;
     }
 }

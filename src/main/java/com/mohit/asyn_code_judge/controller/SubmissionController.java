@@ -2,6 +2,7 @@ package com.mohit.asyn_code_judge.controller;
 
 import com.mohit.asyn_code_judge.dto.CreateSubmissionRequest;
 import com.mohit.asyn_code_judge.entity.Submission;
+import com.mohit.asyn_code_judge.entity.SubmissionStatus;
 import com.mohit.asyn_code_judge.service.SubmissionService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class SubmissionController {
     }
 
     @GetMapping
-    public List<Submission> getAllSubmissions() {
-        return submissionService.getAllSubmissions();
+    public List<Submission> getAllSubmissions(@RequestParam(required = false)SubmissionStatus status) {
+        return submissionService.getAllSubmissions(status);
     }
 
     @GetMapping("/{id}")
@@ -37,5 +38,13 @@ public class SubmissionController {
         Submission saved=submissionService.createSubmission(request);
         URI location = URI.create("/api/submissions/" + saved.getId());
         return ResponseEntity.created(location).body(saved);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSubmission(@PathVariable Long id) {
+        if(submissionService.deleteSubmission(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
