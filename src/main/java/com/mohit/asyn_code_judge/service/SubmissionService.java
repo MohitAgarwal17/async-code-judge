@@ -3,6 +3,7 @@ package com.mohit.asyn_code_judge.service;
 import com.mohit.asyn_code_judge.dto.CreateSubmissionRequest;
 import com.mohit.asyn_code_judge.entity.Submission;
 import com.mohit.asyn_code_judge.entity.SubmissionStatus;
+import com.mohit.asyn_code_judge.exception.SubmissionNotFoundException;
 import com.mohit.asyn_code_judge.repository.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class SubmissionService {
         return submissionRepository.findByStatus(status);
     }
 
-    public Optional<Submission> getSubmissionById(Long id) {
-        return submissionRepository.findById(id);
+    public Submission getSubmissionById(Long id) {
+        return submissionRepository.findById(id).orElseThrow(() -> new SubmissionNotFoundException(id));
     }
 
     public Submission createSubmission(CreateSubmissionRequest request) {
@@ -37,11 +38,10 @@ public class SubmissionService {
         return submissionRepository.save(submission);
     }
 
-    public boolean deleteSubmission(Long id) {
+    public void deleteSubmission(Long id) {
         if(!submissionRepository.existsById(id)) {
-            return false;
+            throw new SubmissionNotFoundException(id);
         }
         submissionRepository.deleteById(id);
-        return true;
     }
 }

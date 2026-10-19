@@ -5,6 +5,7 @@ import com.mohit.asyn_code_judge.entity.Submission;
 import com.mohit.asyn_code_judge.entity.SubmissionStatus;
 import com.mohit.asyn_code_judge.service.SubmissionService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,8 @@ public class SubmissionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Submission> getSubmission(@PathVariable Long id) {
-        Optional<Submission> result=submissionService.getSubmissionById(id);
-        return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Submission getSubmission(@PathVariable Long id) {
+        return submissionService.getSubmissionById(id);
     }
 
     @PostMapping
@@ -41,10 +41,8 @@ public class SubmissionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSubmission(@PathVariable Long id) {
-        if(submissionService.deleteSubmission(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSubmission(@PathVariable Long id) {
+        submissionService.deleteSubmission(id);
     }
 }
