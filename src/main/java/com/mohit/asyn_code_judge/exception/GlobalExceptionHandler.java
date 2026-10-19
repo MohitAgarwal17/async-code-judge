@@ -16,9 +16,15 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(SubmissionNotFoundException.class)
-    public ResponseEntity<ApiError> handleNotFound(SubmissionNotFoundException ex) {
+    public ResponseEntity<ApiError> submissionNotFound(SubmissionNotFoundException ex) {
         ApiError body = new ApiError(404, "Not Found", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(UnsupportedLanguageException.class)
+    public ResponseEntity<ApiError> languageNotFound(UnsupportedLanguageException ex) {
+        ApiError body = new ApiError(400, "Bad Request", ex.getMessage());
+        return ResponseEntity.badRequest().body(body);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
