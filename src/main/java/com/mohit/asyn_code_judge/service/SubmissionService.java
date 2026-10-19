@@ -5,11 +5,9 @@ import com.mohit.asyn_code_judge.entity.Submission;
 import com.mohit.asyn_code_judge.entity.SubmissionStatus;
 import com.mohit.asyn_code_judge.exception.SubmissionNotFoundException;
 import com.mohit.asyn_code_judge.repository.SubmissionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SubmissionService {
