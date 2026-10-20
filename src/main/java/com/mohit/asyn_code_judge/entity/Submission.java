@@ -10,8 +10,10 @@ public class Submission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String language;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private SubmissionStatus status;
 
