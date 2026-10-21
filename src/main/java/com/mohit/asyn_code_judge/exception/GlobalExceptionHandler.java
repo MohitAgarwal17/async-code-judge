@@ -27,6 +27,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(body);
     }
 
+    @ExceptionHandler(java.lang.Exception.class)
+    public ResponseEntity<ApiError> handleUnexpectedException(java.lang.Exception ex) {
+        ApiError body = new ApiError(500, "Internal Server Error", "An unexpected error occurred");
+        return ResponseEntity.internalServerError().body(body);
+    }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiError> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         String message = "Invalid value '" + ex.getValue() + "' for '" + ex.getName() + "'";
