@@ -1,8 +1,0 @@
-{
-  "title": "Two Sum",
-  "slug": "two-sum",
-  "description": "Given an array of integers and a target, return the indices of two numbers that add up to the target.",
-  "difficulty": "EASY",
-  "timeLimitMs": 2000,
-  "memoryLimitMb": 256
-}

@@ -10,6 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
+
 import java.time.Instant;
 
 @Entity
@@ -41,6 +46,10 @@ public class Problem {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
+
+    @OneToMany(mappedBy = "problem")
+    @JsonIgnore
+    private List<TestCase> testCases = new ArrayList<>();
 
     @PrePersist
     void onCreate() {

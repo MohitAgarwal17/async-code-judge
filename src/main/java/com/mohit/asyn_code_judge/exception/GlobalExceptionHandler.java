@@ -38,6 +38,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 
+    @ExceptionHandler(TestCaseNotFoundException.class)
+    public ResponseEntity<ApiError> TestCaseNotFound(TestCaseNotFoundException ex) {
+        ApiError body = new ApiError(404, "Not Found", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
     @ExceptionHandler(java.lang.Exception.class)
     public ResponseEntity<ApiError> handleUnexpectedException(java.lang.Exception ex) {
         if (ex instanceof ErrorResponse errorResponse && errorResponse.getStatusCode().is4xxClientError()) {
