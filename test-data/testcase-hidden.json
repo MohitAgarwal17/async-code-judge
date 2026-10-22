@@ -1,0 +1,5 @@
+{
+  "input": "3 3\n6",
+  "expectedOutput": "0 1",
+  "sample": false
+}
