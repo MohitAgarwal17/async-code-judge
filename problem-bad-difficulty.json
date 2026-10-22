@@ -1,0 +1,8 @@
+{
+  "title": "Bad Difficulty",
+  "slug": "bad-difficulty",
+  "description": "x",
+  "difficulty": "EXTREME",
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 128
+}

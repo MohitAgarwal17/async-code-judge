@@ -32,6 +32,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(body);
     }
 
+    @ExceptionHandler(ProblemNotFoundException.class)
+    public ResponseEntity<ApiError> ProblemNotFound(ProblemNotFoundException ex) {
+        ApiError body = new ApiError(404, "Not Found", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
     @ExceptionHandler(java.lang.Exception.class)
     public ResponseEntity<ApiError> handleUnexpectedException(java.lang.Exception ex) {
         if (ex instanceof ErrorResponse errorResponse && errorResponse.getStatusCode().is4xxClientError()) {
